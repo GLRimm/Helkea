@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://6icw8yk2cy6n"]
+
+[ext_resource type="Script" uid="uid://cnca0m8yrsdld" path="res://enemy_health_bar.gd" id="1_qap5u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qap5u"]
+bg_color = Color(0, 0, 0, 0.78431374)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c0t6j"]
+bg_color = Color(0.73784006, 0.27752027, 0.23650694, 1)
+corner_radius_top_left = 4
+corner_radius_bottom_left = 4
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_qap5u")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.337
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 51.0
+offset_bottom = -4.4800005
+theme_override_styles/background = SubResource("StyleBoxFlat_qap5u")
+theme_override_styles/fill = SubResource("StyleBoxFlat_c0t6j")
+value = 50.0
+show_percentage = false
