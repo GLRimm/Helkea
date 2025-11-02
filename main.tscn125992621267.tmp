@@ -18,7 +18,7 @@ offset_right = 2024.0
 offset_bottom = 1416.0
 color = Color(0, 0, 0, 1)
 
-[node name="DungeonManager" type="Node" parent="." node_paths=PackedStringArray("room_container")]
+[node name="RoomManager" type="Node" parent="." node_paths=PackedStringArray("room_container")]
 script = ExtResource("2_lquwl")
 room_container = NodePath("../RoomContainer")
 default_room_scene = ExtResource("3_7mycd")
