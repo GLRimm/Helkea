@@ -1,8 +1,10 @@
 extends CharacterBody2D
 
-@export var speed = 400
-@export var knockback_strength = 600
+@export var speed = 200
+@export var knockback_strength = 300
 @export var is_attacking = false
+
+const ACCEL = 10
 
 var screen_size
 var direction = "down";
@@ -50,31 +52,38 @@ func _physics_process(delta: float) -> void:
 			is_stunned = false
 		return
 		
-	if is_attacking:
-		move_and_slide()
-		return
+	var axis = Vector2.ZERO
 	
-	velocity = Vector2.ZERO
-	if Input.is_action_pressed("move_right"):
-		velocity.x += 1
-	if Input.is_action_pressed("move_left"):
-		velocity.x -= 1
-	if Input.is_action_pressed("move_down"):
-		velocity.y += 1
-	if Input.is_action_pressed("move_up"):
-		velocity.y -= 1
-	
-	direction = get_8_direction(velocity)
+	if not is_attacking:
+		if Input.is_action_pressed("move_right"):
+			axis.x += 1
+		if Input.is_action_pressed("move_left"):
+			axis.x -= 1
+		if Input.is_action_pressed("move_down"):
+			axis.y += 1
+		if Input.is_action_pressed("move_up"):
+			axis.y -= 1
+		
+		direction = get_8_direction(axis)
 	
 	if Input.is_action_pressed("attack"):
 		$AnimationPlayer.play("attack_" + direction)
+		move_and_slide()
 		return
-	if velocity.length() > 0:
-		direction = get_8_direction(velocity)
-		velocity = velocity.normalized() * speed
+	if axis.length() > 0:
+		axis = axis.normalized()
+		var target_velocity = speed * axis
+		velocity = velocity.lerp(target_velocity, ACCEL * delta)
+		
 		$AnimationPlayer.play("run_" + direction)
 	else:
-		$AnimationPlayer.play("idle_" + direction)
+		velocity = velocity.lerp(Vector2.ZERO, ACCEL * delta)
+		if is_attacking:
+			pass
+		elif velocity.length() < 50:
+			$AnimationPlayer.play("idle_" + direction)
+		else:
+			$AnimationPlayer.play("run_" + direction)
 		
 	move_and_slide()
 	# position = position.clamp(Vector2.ZERO, screen_size)

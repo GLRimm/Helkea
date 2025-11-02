@@ -9,6 +9,6 @@
 [node name="Room" parent="." instance=ExtResource("1_arrdh")]
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("2_ju58f")]
-position = Vector2(121, 652)
+position = Vector2(45, 338)
 
 [node name="HUD" parent="." instance=ExtResource("3_sqxie")]

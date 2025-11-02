@@ -15,6 +15,9 @@ func _ready():
 func load_room(room_scene: PackedScene):
 	if current_room:
 		current_room.queue_free()
+		current_room = null
+		
+	await get_tree().process_frame
 		
 	current_room = room_scene.instantiate()
 	current_room.enemy_count = level

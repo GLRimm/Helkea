@@ -4,6 +4,8 @@ extends Node2D
 @export var enemy_scene: PackedScene
 @export var health_pack_scene: PackedScene
 
+@onready var wall_layer = $TileMapWalls
+
 var active_enemies: Array[Node] = []
 var all_doors: Array[Area2D] = []
 
@@ -66,6 +68,12 @@ func _check_room_cleared():
 		print("all enemies cleared")
 		for door in all_doors:
 			door.lock(false)
+			var tile_pos = wall_layer.local_to_map(door.global_position)
+			wall_layer.erase_cell(tile_pos)
+			wall_layer.erase_cell(tile_pos + Vector2i(1, 0))
+			wall_layer.erase_cell(tile_pos + Vector2i(0, 1))
+			wall_layer.erase_cell(tile_pos + Vector2i(1, 1))
+			
 		room_cleared.emit()
 		
 

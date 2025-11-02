@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bns5k4bjk88ul"]
+[gd_scene load_steps=8 format=3 uid="uid://bns5k4bjk88ul"]
 
 [ext_resource type="Script" uid="uid://bgvgnl63rf7yh" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://lv804t5icbq5" path="res://player.tscn" id="1_ig7tw"]
@@ -6,9 +6,17 @@
 [ext_resource type="PackedScene" uid="uid://gnaicydcacbd" path="res://room.tscn" id="3_7mycd"]
 [ext_resource type="PackedScene" uid="uid://bo8bqjx01sd2r" path="res://hud.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://b44tjkhuim65d" path="res://pause_menu.tscn" id="6_7mycd"]
+[ext_resource type="Script" uid="uid://w8cgtumjjkmb" path="res://camera_2d.gd" id="7_272bh"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_0xm2m")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -648.0
+offset_top = -224.0
+offset_right = 2024.0
+offset_bottom = 1416.0
+color = Color(0, 0, 0, 1)
 
 [node name="RoomManager" type="Node" parent="." node_paths=PackedStringArray("room_container")]
 script = ExtResource("2_lquwl")
@@ -18,10 +26,13 @@ default_room_scene = ExtResource("3_7mycd")
 [node name="RoomContainer" type="Node2D" parent="."]
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("1_ig7tw")]
-position = Vector2(232, 553)
+position = Vector2(100, 300)
 
 [node name="HUD" parent="." instance=ExtResource("4_1bvp3")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("6_7mycd")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("7_272bh")

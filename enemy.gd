@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-@export var speed = 200
-@export var knockback_strength = 800
+@export var speed = 120
+@export var knockback_strength = 400
 
 @onready var collision_shape = $CollisionShape2D
 
