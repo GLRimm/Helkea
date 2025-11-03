@@ -52,3 +52,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_37p78")
 theme_override_styles/fill = SubResource("StyleBoxFlat_64ctp")
 value = 100.0
 show_percentage = false
+
+[node name="RoomLabel" type="Label" parent="MarginContainer/VBoxContainer/HealthBar"]
+layout_mode = 2
+text = "Start"
