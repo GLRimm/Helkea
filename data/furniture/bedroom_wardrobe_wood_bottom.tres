@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="FurniturePieceData" load_steps=4 format=3 uid="uid://bmact2mio5usi"]
+
+[ext_resource type="Script" uid="uid://cw4p05255o8hd" path="res://resources/furniture_piece_data.gd" id="1_fhhxw"]
+[ext_resource type="Texture2D" uid="uid://blfn7pl2ppad4" path="res://assets/room_tilesets/Room.png" id="2_6gdfq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p3lo8"]
+size = Vector2(64, 96)
+
+[resource]
+script = ExtResource("1_fhhxw")
+furniture_name = "Wardrobe Wood Bottom"
+sprite_texture = ExtResource("2_6gdfq")
+atlas_coords = Vector2i(6, 3)
+size_in_tiles = Vector2i(2, 3)
+collision_shape = SubResource("RectangleShape2D_p3lo8")
+furniture_set = "bedroom"
+max_health = 300.0

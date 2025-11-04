@@ -16,38 +16,25 @@ var is_visited: bool = false
 var active_enemies: Array[Node] = []
 var all_doors: Dictionary = {}
 
-var layout_generator: RoomLayoutGenerator
-
 signal room_cleared
 signal door_entered(direction: String)
 
 const TILE_SIZE = 32
-const OPEN_NORTH_DOOR = preload("res://patterns/open_north_door.tres")
-const CLOSED_NORTH_DOOR = preload("res://patterns/closed_north_door.tres")
-const OPEN_WEST_DOOR = preload("res://patterns/open_west_door.tres")
-const CLOSED_WEST_DOOR = preload("res://patterns/closed_west_door.tres")
-const OPEN_EAST_DOOR = preload("res://patterns/open_east_door.tres")
-const CLOSED_EAST_DOOR = preload("res://patterns/closed_east_door.tres")
-const OPEN_SOUTH_DOOR = preload("res://patterns/open_south_door.tres")
-const CLOSED_SOUTH_DOOR = preload("res://patterns/closed_south_door.tres")
 
-func _init():
-	layout_generator = RoomLayoutGenerator.new()
-	
-func _ready():
-	add_child(layout_generator)
+
 
 func setup(data: RoomData):
 	room_data = data
 	is_cleared = data.is_cleared
 	is_visited = data.is_visited
 	
-	if room_data.wall_tiles.is_empty() and room_data.furniture_zones.is_empty():
-		layout_generator.generate_layout(room_data)
+	if room_data.furniture_placements.is_empty():
+		var layout = RoomLayoutGenerator.generate_layout(room_data)
+		room_data.furniture_placements = layout["furniture_placements"]
 		print("Generated %s layout for room #%d with %d zones" % [
-			room_data.layout_type,
+			RoomData.LayoutType.keys()[room_data.layout_type],
 			room_data.room_id,
-			room_data.furniture_zones.size()
+			room_data.furniture_placements.size()
 		])
 	await get_tree().process_frame
 		
@@ -63,87 +50,36 @@ func _apply_layout():
 	"""
 	# TODO: Implement this based on your tilemap setup
 	# For now, just print debug info
-	print("  Wall tiles: %d" % room_data.wall_tiles.size())
-	print("  Furniture zones: %d" % room_data.furniture_zones.size())
+	# print("  Wall tiles: %d" % room_data.wall_tiles.size())
+	print("  Furniture zones: %d" % room_data.furniture_placements.size())
 	
 	# _place_walls()
 	_place_furniture_in_zones()
 	
 	
 func _place_furniture_in_zones():
-	
-	if not has_node("FurnitureTileMapLayer"):
-		print("Warning: No FurnitureTileMapLayer found!")
-		return
-	
-	var furniture_layer = $FurnitureTileMapLayer
-	furniture_layer.clear()
-	
-	# Set appropriate tileset based on room's furniture_set
-	var tileset = living_room_tileset # _get_furniture_tileset()
-	if not tileset:
-		print("Warning: No tileset for furniture_set: %s" % room_data.furniture_set)
-		return
-	
-	furniture_layer.tile_set = tileset
-	
-	# Fill each zone with furniture
-	for zone in room_data.furniture_zones:
-		_fill_zone_with_furniture(furniture_layer, zone, tileset)
+	for placement in room_data.furniture_placements:
+		#
+		var furniture_data = FurnitureDB.get_random_furniture(
+			room_data.furniture_set,
+			placement.size_requirement
+		)
 		
+		if not furniture_data:
+			# Fallback: get any furniture if exact size not available
+			furniture_data = FurnitureDB.get_random_furniture(room_data.furniture_set)
+		
+		if furniture_data:
+			_spawn_furniture(furniture_data, placement.position * 32, placement.rotation)
 
-func _get_furniture_tileset() -> TileSet:
-	"""Get the appropriate tileset for this room's furniture set"""
-	match room_data.furniture_set:
-		"bedroom":
-			return bedroom_tileset
-		"kitchen":
-			return kitchen_tileset
-		"living_room":
-			return living_room_tileset
-		"bathroom":
-			return bathroom_tileset
-		_:
-			return living_room_tileset  # Default fallback
+func _spawn_furniture(data: FurniturePieceData, position: Vector2, rotation: float = 0.0):
+	var furniture_scene = preload("res://furniture.tscn")
+	var furniture = furniture_scene.instantiate()
+	furniture.furniture_data = data
+	furniture.position = position
+	furniture.rotation_degrees = rotation
+	add_child(furniture)
 		
-func _fill_zone_with_furniture(layer: TileMapLayer, zone: Rect2i, tileset: TileSet):
-	"""Randomly place furniture tiles in a zone"""
-	# Calculate how many furniture pieces to place based on zone size
-	var zone_area = zone.size.x * zone.size.y
-	var num_pieces = clampi(zone_area / 4, 1, 4)  # 1-4 pieces per zone
-	
-	# Get available tiles from tileset
-	var source = tileset.get_source(0)
-	if not source:
-		return
-	
-	var available_tiles = source.get_tiles_count()
-	if available_tiles == 0:
-		return
-	
-	# Track placed tiles to avoid overlaps
-	var placed_positions = []
-	
-	for i in range(num_pieces):
-		# Try up to 5 times to place this piece
-		for attempt in range(5):
-			# Pick random tile from tileset
-			var tile_id = randi_range(0, available_tiles - 1)
-			var atlas_coords = source.get_tile_id(tile_id)
-			
-			# Random position within zone
-			var tile_x = zone.position.x + randi_range(0, max(0, zone.size.x - 1))
-			var tile_y = zone.position.y + randi_range(0, max(0, zone.size.y - 1))
-			var tile_pos = Vector2i(tile_x, tile_y)
-			
-			# Check if position is already occupied
-			if tile_pos in placed_positions:
-				continue
-			
-			# Place the tile
-			layer.set_cell(tile_pos, 0, atlas_coords)
-			placed_positions.append(tile_pos)
-			break  # Successfully placed, move to next piece
 
 func _setup_doors():
 	for door in $Doors.get_children():
@@ -165,7 +101,7 @@ func _configure_doors():
 		var is_connected = room_data.connections.get(direction, false)
 		door.monitoring = is_connected
 		if is_connected and not is_cleared:
-			_lock_door(door, true)
+			door.lock(true)
 
 func _apply_room_tint():
 	match room_data.room_type:
@@ -237,37 +173,7 @@ func _on_room_cleared():
 func _lock_all_doors(should_lock: bool):
 	for door in all_doors.values():
 		if door.visible and room_data.connections.get(door.direction, false):
-			_lock_door(door, should_lock)
-			
-func _lock_door(door: Door, should_lock: bool):
-	if not has_node("TileMapWalls"):
-		print("WARNING: No TileMapWalls node found!")
-		return
-	
-	var wall_tile_map = $TileMapWalls
-	
-	print("DEBUG: _lock_door called for %s door, should_lock=%s" % [door.direction, should_lock])
-	
-	match door.direction:
-		"north":
-			var pattern = CLOSED_NORTH_DOOR if should_lock else OPEN_NORTH_DOOR
-			print("DEBUG: Setting north door pattern at (8, -3)")
-			wall_tile_map.set_pattern(Vector2i(8, -3), pattern)
-		"west":
-			var pattern = CLOSED_WEST_DOOR if should_lock else OPEN_WEST_DOOR
-			print("DEBUG: Setting west door pattern at (-1, 6)")
-			wall_tile_map.set_pattern(Vector2i(-1, 6), pattern)
-		"east":
-			var pattern = CLOSED_EAST_DOOR if should_lock else OPEN_EAST_DOOR
-			print("DEBUG: Setting east door pattern at (20, 6)")
-			wall_tile_map.set_pattern(Vector2i(20, 6), pattern)
-		"south":
-			var pattern = CLOSED_SOUTH_DOOR if should_lock else OPEN_SOUTH_DOOR
-			print("DEBUG: Setting south door pattern at (8, 19)")
-			wall_tile_map.set_pattern(Vector2i(8, 19), pattern)
-	
-	print("DEBUG: Pattern applied, calling door.lock(%s)" % should_lock)
-	door.lock(should_lock)
+			door.lock(should_lock)
 
 func _spawn_treasure():
 	if health_pack_scene:
@@ -280,7 +186,7 @@ func get_spawn_position() -> Vector2:
 
 func get_door_spawn_position(from_direction: String) -> Vector2:
 	const OPPOSITE = {"north": "south", "south": "north", "east": "west", "west": "east"}
-	const OFFSETS = {"north": Vector2(0, 80), "south": Vector2(0, -32), "east": Vector2(-32, 0), "west": Vector2(80, 0)}
+	const OFFSETS = {"north": Vector2(50, 96), "south": Vector2(50, 0), "east": Vector2(0, 128), "west": Vector2(32, 128)}
 	
 	var spawn_dir = OPPOSITE.get(from_direction, "south")
 	if spawn_dir in all_doors:

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="FurniturePieceData" load_steps=4 format=3 uid="uid://btc1p1ld78f3l"]
+
+[ext_resource type="Script" uid="uid://cw4p05255o8hd" path="res://resources/furniture_piece_data.gd" id="1_qnu0f"]
+[ext_resource type="Texture2D" uid="uid://qei6qflsxamh" path="res://assets/room_tilesets/Bathroom.png" id="2_1khtl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nerpd"]
+size = Vector2(32, 32)
+
+[resource]
+script = ExtResource("1_qnu0f")
+furniture_name = "Towel Rack Pink"
+sprite_texture = ExtResource("2_1khtl")
+atlas_coords = Vector2i(9, 8)
+size_in_tiles = Vector2i(1, 1)
+collision_shape = SubResource("RectangleShape2D_nerpd")
+furniture_set = "bathroom"
+weight = 3
+max_health = 50.0

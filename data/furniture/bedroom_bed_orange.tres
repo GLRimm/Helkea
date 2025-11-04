@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="FurniturePieceData" load_steps=4 format=3 uid="uid://cfccp4lohof7q"]
+
+[ext_resource type="Script" uid="uid://cw4p05255o8hd" path="res://resources/furniture_piece_data.gd" id="1_qcw1m"]
+[ext_resource type="Texture2D" uid="uid://blfn7pl2ppad4" path="res://assets/room_tilesets/Room.png" id="2_58gmj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o4txa"]
+size = Vector2(96, 64)
+
+[resource]
+script = ExtResource("1_qcw1m")
+furniture_name = "Bed Orange"
+sprite_texture = ExtResource("2_58gmj")
+atlas_coords = Vector2i(0, 4)
+size_in_tiles = Vector2i(3, 2)
+collision_shape = SubResource("RectangleShape2D_o4txa")
+furniture_set = "bedroom"
+weight = 2
+max_health = 300.0

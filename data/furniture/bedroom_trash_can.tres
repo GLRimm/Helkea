@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="FurniturePieceData" load_steps=4 format=3 uid="uid://bbnblwfu66cnt"]
+
+[ext_resource type="Script" uid="uid://cw4p05255o8hd" path="res://resources/furniture_piece_data.gd" id="1_ewsxe"]
+[ext_resource type="Texture2D" uid="uid://blfn7pl2ppad4" path="res://assets/room_tilesets/Room.png" id="2_ipk4y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_665px"]
+size = Vector2(32, 32)
+
+[resource]
+script = ExtResource("1_ewsxe")
+furniture_name = "Trash Can"
+sprite_texture = ExtResource("2_ipk4y")
+atlas_coords = Vector2i(14, 8)
+size_in_tiles = Vector2i(1, 1)
+collision_shape = SubResource("RectangleShape2D_665px")
+furniture_set = "bedroom"
+weight = 3
+max_health = 50.0

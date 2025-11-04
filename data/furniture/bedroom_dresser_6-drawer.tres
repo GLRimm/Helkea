@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="FurniturePieceData" load_steps=4 format=3 uid="uid://biivwf5u76t8c"]
+
+[ext_resource type="Script" uid="uid://cw4p05255o8hd" path="res://resources/furniture_piece_data.gd" id="1_hgbxc"]
+[ext_resource type="Texture2D" uid="uid://blfn7pl2ppad4" path="res://assets/room_tilesets/Room.png" id="2_g7p3k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s30kx"]
+size = Vector2(96, 96)
+
+[resource]
+script = ExtResource("1_hgbxc")
+furniture_name = "Dresser 6-Drawer"
+sprite_texture = ExtResource("2_g7p3k")
+atlas_coords = Vector2i(13, 5)
+size_in_tiles = Vector2i(3, 3)
+collision_shape = SubResource("RectangleShape2D_s30kx")
+furniture_set = "bedroom"
+max_health = 450.0

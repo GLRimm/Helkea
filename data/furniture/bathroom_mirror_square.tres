@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="FurniturePieceData" load_steps=4 format=3 uid="uid://bgjvreuuqcw0a"]
+
+[ext_resource type="Script" uid="uid://cw4p05255o8hd" path="res://resources/furniture_piece_data.gd" id="1_y1bx7"]
+[ext_resource type="Texture2D" uid="uid://qei6qflsxamh" path="res://assets/room_tilesets/Bathroom.png" id="2_d0n4b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7sdlx"]
+size = Vector2(32, 32)
+
+[resource]
+script = ExtResource("1_y1bx7")
+furniture_name = "Mirror Square"
+sprite_texture = ExtResource("2_d0n4b")
+atlas_coords = Vector2i(13, 5)
+size_in_tiles = Vector2i(1, 1)
+collision_shape = SubResource("RectangleShape2D_7sdlx")
+furniture_set = "bathroom"
+weight = 3
+max_health = 50.0

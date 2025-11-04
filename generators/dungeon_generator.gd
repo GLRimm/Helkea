@@ -104,7 +104,7 @@ func _assign_room_types():
 	
 	if farthest_room != start_pos:
 		rooms[farthest_room].room_type = "boss"
-		rooms[farthest_room].layout_type = [RoomData.LayoutType.PILLARS, RoomData.LayoutType.ARENA].pick_random()
+		rooms[farthest_room].layout_type = [RoomData.LayoutType.GRID, RoomData.LayoutType.SHOWROOM].pick_random()
 	
 	# Assign treasure rooms (dead ends, far from start)
 	var treasure_count = 0
@@ -200,17 +200,12 @@ func print_dungeon_layout():
 func _choose_random_layout() -> RoomData.LayoutType:
 	"""Type-safe random layout selection"""
 	var layouts = [
-		RoomData.LayoutType.SPARSE,
-		RoomData.LayoutType.SCATTERED,
-		RoomData.LayoutType.CORRIDORS,
 		RoomData.LayoutType.ROWS,
 		RoomData.LayoutType.COLUMNS,
-		RoomData.LayoutType.CROSSES,
-		RoomData.LayoutType.QUARTERS,
-		RoomData.LayoutType.PILLARS,
-		RoomData.LayoutType.ARENA,
-		RoomData.LayoutType.GAUNTLET,
-		RoomData.LayoutType.CHECKERBOARD,
-		RoomData.LayoutType.CLUSTERED
+		RoomData.LayoutType.EMPTY,
+		RoomData.LayoutType.SHOWROOM,
+		RoomData.LayoutType.PERIMETER,
+		RoomData.LayoutType.GRID,
+		RoomData.LayoutType.MAZE
 	]
 	return layouts.pick_random()

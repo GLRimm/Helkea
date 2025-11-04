@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="FurniturePieceData" load_steps=4 format=3 uid="uid://bc4146qiv2agi"]
+
+[ext_resource type="Script" uid="uid://cw4p05255o8hd" path="res://resources/furniture_piece_data.gd" id="1_kqfti"]
+[ext_resource type="Texture2D" uid="uid://c3eh1d7odw5it" path="res://assets/room_tilesets/Kitcheen.png" id="2_aoj6a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ipq8o"]
+size = Vector2(32, 32)
+
+[resource]
+script = ExtResource("1_kqfti")
+furniture_name = "Microwave"
+sprite_texture = ExtResource("2_aoj6a")
+atlas_coords = Vector2i(11, 0)
+size_in_tiles = Vector2i(1, 1)
+collision_shape = SubResource("RectangleShape2D_ipq8o")
+furniture_set = "kitchen"
+weight = 3
+max_health = 50.0

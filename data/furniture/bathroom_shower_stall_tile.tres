@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="FurniturePieceData" load_steps=4 format=3 uid="uid://c8277f0lekchv"]
+
+[ext_resource type="Script" uid="uid://cw4p05255o8hd" path="res://resources/furniture_piece_data.gd" id="1_6qdfd"]
+[ext_resource type="Texture2D" uid="uid://qei6qflsxamh" path="res://assets/room_tilesets/Bathroom.png" id="2_hatxb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_toixe"]
+size = Vector2(32, 64)
+
+[resource]
+script = ExtResource("1_6qdfd")
+furniture_name = "Shower Stall Tile"
+sprite_texture = ExtResource("2_hatxb")
+atlas_coords = Vector2i(15, 10)
+size_in_tiles = Vector2i(1, 2)
+collision_shape = SubResource("RectangleShape2D_toixe")
+furniture_set = "bathroom"
+weight = 2

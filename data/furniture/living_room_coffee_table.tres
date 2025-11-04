@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="FurniturePieceData" load_steps=4 format=3 uid="uid://x6sfc8ofqhmw"]
+
+[ext_resource type="Script" uid="uid://cw4p05255o8hd" path="res://resources/furniture_piece_data.gd" id="1_h68i1"]
+[ext_resource type="Texture2D" uid="uid://cbu5n6j78dy7o" path="res://assets/room_tilesets/Living_Room.png" id="2_7ujh3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kj1nx"]
+size = Vector2(64, 32)
+
+[resource]
+script = ExtResource("1_h68i1")
+furniture_name = "Coffee Table"
+sprite_texture = ExtResource("2_7ujh3")
+atlas_coords = Vector2i(13, 1)
+size_in_tiles = Vector2i(2, 1)
+collision_shape = SubResource("RectangleShape2D_kj1nx")
+furniture_set = "living_room"
+weight = 3

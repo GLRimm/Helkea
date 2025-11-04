@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="FurniturePieceData" load_steps=4 format=3 uid="uid://cnscynbh8mokv"]
+
+[ext_resource type="Script" uid="uid://cw4p05255o8hd" path="res://resources/furniture_piece_data.gd" id="1_p75oc"]
+[ext_resource type="Texture2D" uid="uid://c3eh1d7odw5it" path="res://assets/room_tilesets/Kitcheen.png" id="2_fuxss"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v3hgl"]
+size = Vector2(32, 32)
+
+[resource]
+script = ExtResource("1_p75oc")
+furniture_name = "Chair Magenta"
+sprite_texture = ExtResource("2_fuxss")
+atlas_coords = Vector2i(12, 8)
+size_in_tiles = Vector2i(1, 1)
+collision_shape = SubResource("RectangleShape2D_v3hgl")
+furniture_set = "kitchen"
+weight = 4
+max_health = 50.0

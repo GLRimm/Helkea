@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="FurniturePieceData" load_steps=4 format=3 uid="uid://cm31kttn6ymiq"]
+
+[ext_resource type="Script" uid="uid://cw4p05255o8hd" path="res://resources/furniture_piece_data.gd" id="1_4nqa4"]
+[ext_resource type="Texture2D" uid="uid://c3eh1d7odw5it" path="res://assets/room_tilesets/Kitcheen.png" id="2_02kk2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r1oo5"]
+size = Vector2(32, 64)
+
+[resource]
+script = ExtResource("1_4nqa4")
+furniture_name = "Fridge White"
+sprite_texture = ExtResource("2_02kk2")
+atlas_coords = Vector2i(9, 0)
+size_in_tiles = Vector2i(1, 2)
+collision_shape = SubResource("RectangleShape2D_r1oo5")
+furniture_set = "kitchen"
+weight = 2

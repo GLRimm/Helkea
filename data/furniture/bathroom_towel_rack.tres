@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="FurniturePieceData" load_steps=4 format=3 uid="uid://vyocdo0yyejc"]
+
+[ext_resource type="Script" uid="uid://cw4p05255o8hd" path="res://resources/furniture_piece_data.gd" id="1_ychfp"]
+[ext_resource type="Texture2D" uid="uid://qei6qflsxamh" path="res://assets/room_tilesets/Bathroom.png" id="2_yrxry"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_me2h4"]
+size = Vector2(32, 32)
+
+[resource]
+script = ExtResource("1_ychfp")
+furniture_name = "Towel Rack"
+sprite_texture = ExtResource("2_yrxry")
+atlas_coords = Vector2i(5, 0)
+size_in_tiles = Vector2i(1, 1)
+collision_shape = SubResource("RectangleShape2D_me2h4")
+furniture_set = "bathroom"
+weight = 3
+max_health = 50.0

@@ -1,7 +1,0 @@
-[gd_resource type="Resource" script_class="FurnitureItem" load_steps=2 format=3 uid="uid://c7uxofer6vkug"]
-
-[ext_resource type="Script" uid="uid://71b62wgpodgb" path="res://resources/furniture_item.gd" id="1_0e36m"]
-
-[resource]
-script = ExtResource("1_0e36m")
-metadata/_custom_type_script = "uid://71b62wgpodgb"

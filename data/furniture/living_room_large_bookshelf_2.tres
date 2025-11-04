@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="FurniturePieceData" load_steps=4 format=3 uid="uid://c5hutddfjq6hw"]
+
+[ext_resource type="Script" uid="uid://cw4p05255o8hd" path="res://resources/furniture_piece_data.gd" id="1_idmar"]
+[ext_resource type="Texture2D" uid="uid://cbu5n6j78dy7o" path="res://assets/room_tilesets/Living_Room.png" id="2_nmox7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jnss0"]
+size = Vector2(64, 96)
+
+[resource]
+script = ExtResource("1_idmar")
+furniture_name = "Large Bookshelf 2"
+sprite_texture = ExtResource("2_nmox7")
+atlas_coords = Vector2i(14, 4)
+size_in_tiles = Vector2i(2, 3)
+collision_shape = SubResource("RectangleShape2D_jnss0")
+furniture_set = "living_room"
+max_health = 300.0

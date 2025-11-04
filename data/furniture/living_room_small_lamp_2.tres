@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="FurniturePieceData" load_steps=4 format=3 uid="uid://cr57tsjrnaw3p"]
+
+[ext_resource type="Script" uid="uid://cw4p05255o8hd" path="res://resources/furniture_piece_data.gd" id="1_gkfh6"]
+[ext_resource type="Texture2D" uid="uid://cbu5n6j78dy7o" path="res://assets/room_tilesets/Living_Room.png" id="2_0x1sj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i30qq"]
+size = Vector2(32, 32)
+
+[resource]
+script = ExtResource("1_gkfh6")
+furniture_name = "Small Lamp 2"
+sprite_texture = ExtResource("2_0x1sj")
+atlas_coords = Vector2i(3, 6)
+size_in_tiles = Vector2i(1, 1)
+collision_shape = SubResource("RectangleShape2D_i30qq")
+furniture_set = "living_room"
+weight = 4
+max_health = 50.0

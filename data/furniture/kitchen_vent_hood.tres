@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="FurniturePieceData" load_steps=4 format=3 uid="uid://ftrx1c40phjr"]
+
+[ext_resource type="Script" uid="uid://cw4p05255o8hd" path="res://resources/furniture_piece_data.gd" id="1_xj6e5"]
+[ext_resource type="Texture2D" uid="uid://c3eh1d7odw5it" path="res://assets/room_tilesets/Kitcheen.png" id="2_2rwok"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kngrq"]
+size = Vector2(96, 32)
+
+[resource]
+script = ExtResource("1_xj6e5")
+furniture_name = "Vent Hood"
+sprite_texture = ExtResource("2_2rwok")
+atlas_coords = Vector2i(10, 6)
+size_in_tiles = Vector2i(3, 1)
+collision_shape = SubResource("RectangleShape2D_kngrq")
+furniture_set = "kitchen"
+weight = 2
+max_health = 150.0

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="FurniturePieceData" load_steps=4 format=3 uid="uid://cbdiwr032ailn"]
+
+[ext_resource type="Script" uid="uid://cw4p05255o8hd" path="res://resources/furniture_piece_data.gd" id="1_aawxd"]
+[ext_resource type="Texture2D" uid="uid://qei6qflsxamh" path="res://assets/room_tilesets/Bathroom.png" id="2_wxy3a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0j6rk"]
+size = Vector2(64, 32)
+
+[resource]
+script = ExtResource("1_aawxd")
+furniture_name = "Cabinet Wood Dark 2-Wide"
+sprite_texture = ExtResource("2_wxy3a")
+atlas_coords = Vector2i(6, 6)
+size_in_tiles = Vector2i(2, 1)
+collision_shape = SubResource("RectangleShape2D_0j6rk")
+furniture_set = "bathroom"
+weight = 2

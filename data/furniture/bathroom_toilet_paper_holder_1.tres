@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="FurniturePieceData" load_steps=4 format=3 uid="uid://cbu3lfwrs0cyw"]
+
+[ext_resource type="Script" uid="uid://cw4p05255o8hd" path="res://resources/furniture_piece_data.gd" id="1_r0sk3"]
+[ext_resource type="Texture2D" uid="uid://qei6qflsxamh" path="res://assets/room_tilesets/Bathroom.png" id="2_ja7lj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cotna"]
+size = Vector2(32, 32)
+
+[resource]
+script = ExtResource("1_r0sk3")
+furniture_name = "Toilet Paper Holder 1"
+sprite_texture = ExtResource("2_ja7lj")
+atlas_coords = Vector2i(6, 0)
+size_in_tiles = Vector2i(1, 1)
+collision_shape = SubResource("RectangleShape2D_cotna")
+furniture_set = "bathroom"
+weight = 3
+max_health = 50.0

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="FurniturePieceData" load_steps=4 format=3 uid="uid://c4pxj60ct03tp"]
+
+[ext_resource type="Script" uid="uid://cw4p05255o8hd" path="res://resources/furniture_piece_data.gd" id="1_kfwaf"]
+[ext_resource type="Texture2D" uid="uid://cbu5n6j78dy7o" path="res://assets/room_tilesets/Living_Room.png" id="2_lb8qb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m7f0m"]
+size = Vector2(64, 32)
+
+[resource]
+script = ExtResource("1_kfwaf")
+furniture_name = "Wall Art 2"
+sprite_texture = ExtResource("2_lb8qb")
+atlas_coords = Vector2i(6, 3)
+size_in_tiles = Vector2i(2, 1)
+collision_shape = SubResource("RectangleShape2D_m7f0m")
+furniture_set = "living_room"
+weight = 3

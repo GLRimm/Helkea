@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dg8h5iqu1fimw"]
+
+[ext_resource type="Script" uid="uid://34x4deaq6wu0" path="res://furniture.gd" id="1_fugw3"]
+[ext_resource type="Script" uid="uid://braxlmio5tpyo" path="res://components/health_component.gd" id="2_yv02d"]
+
+[node name="Furniture" type="RigidBody2D"]
+script = ExtResource("1_fugw3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_yv02d")

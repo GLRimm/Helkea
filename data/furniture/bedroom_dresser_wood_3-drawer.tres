@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="FurniturePieceData" load_steps=4 format=3 uid="uid://dqkodc0fh7dkm"]
+
+[ext_resource type="Script" uid="uid://cw4p05255o8hd" path="res://resources/furniture_piece_data.gd" id="1_dy1uo"]
+[ext_resource type="Texture2D" uid="uid://blfn7pl2ppad4" path="res://assets/room_tilesets/Room.png" id="2_5q2hc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5mkm3"]
+size = Vector2(64, 64)
+
+[resource]
+script = ExtResource("1_dy1uo")
+furniture_name = "Dresser Wood 3-Drawer"
+sprite_texture = ExtResource("2_5q2hc")
+atlas_coords = Vector2i(4, 4)
+size_in_tiles = Vector2i(2, 2)
+collision_shape = SubResource("RectangleShape2D_5mkm3")
+furniture_set = "bedroom"
+weight = 2
+max_health = 200.0

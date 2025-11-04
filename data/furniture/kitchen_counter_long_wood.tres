@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="FurniturePieceData" load_steps=4 format=3 uid="uid://dj3oqtr3y27x4"]
+
+[ext_resource type="Script" uid="uid://cw4p05255o8hd" path="res://resources/furniture_piece_data.gd" id="1_2stv8"]
+[ext_resource type="Texture2D" uid="uid://c3eh1d7odw5it" path="res://assets/room_tilesets/Kitcheen.png" id="2_2qaob"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kgyfc"]
+size = Vector2(160, 32)
+
+[resource]
+script = ExtResource("1_2stv8")
+furniture_name = "Counter Long Wood"
+sprite_texture = ExtResource("2_2qaob")
+atlas_coords = Vector2i(0, 4)
+size_in_tiles = Vector2i(5, 1)
+collision_shape = SubResource("RectangleShape2D_kgyfc")
+furniture_set = "kitchen"
+max_health = 250.0

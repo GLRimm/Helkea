@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="FurniturePieceData" load_steps=4 format=3 uid="uid://fola6y0jov3s"]
+
+[ext_resource type="Script" uid="uid://cw4p05255o8hd" path="res://resources/furniture_piece_data.gd" id="1_e5krm"]
+[ext_resource type="Texture2D" uid="uid://c3eh1d7odw5it" path="res://assets/room_tilesets/Kitcheen.png" id="2_ok85l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5nw16"]
+size = Vector2(64, 64)
+
+[resource]
+script = ExtResource("1_e5krm")
+furniture_name = "Table Striped Orange"
+sprite_texture = ExtResource("2_ok85l")
+atlas_coords = Vector2i(14, 6)
+size_in_tiles = Vector2i(2, 2)
+collision_shape = SubResource("RectangleShape2D_5nw16")
+furniture_set = "kitchen"
+weight = 2
+max_health = 200.0

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="FurniturePieceData" load_steps=4 format=3 uid="uid://cw4w8bxvniru"]
+
+[ext_resource type="Script" uid="uid://cw4p05255o8hd" path="res://resources/furniture_piece_data.gd" id="1_qhej7"]
+[ext_resource type="Texture2D" uid="uid://blfn7pl2ppad4" path="res://assets/room_tilesets/Room.png" id="2_ucxcg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gxh4t"]
+size = Vector2(96, 64)
+
+[resource]
+script = ExtResource("1_qhej7")
+furniture_name = "Window Large"
+sprite_texture = ExtResource("2_ucxcg")
+atlas_coords = Vector2i(13, 0)
+size_in_tiles = Vector2i(3, 2)
+collision_shape = SubResource("RectangleShape2D_gxh4t")
+furniture_set = "bedroom"
+max_health = 300.0

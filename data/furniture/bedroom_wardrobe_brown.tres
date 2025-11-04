@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="FurniturePieceData" load_steps=4 format=3 uid="uid://cggpp2ineye5k"]
+
+[ext_resource type="Script" uid="uid://cw4p05255o8hd" path="res://resources/furniture_piece_data.gd" id="1_7hddl"]
+[ext_resource type="Texture2D" uid="uid://blfn7pl2ppad4" path="res://assets/room_tilesets/Room.png" id="2_cpvun"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vndbe"]
+size = Vector2(64, 128)
+
+[resource]
+script = ExtResource("1_7hddl")
+furniture_name = "Wardrobe Brown"
+sprite_texture = ExtResource("2_cpvun")
+atlas_coords = Vector2i(10, 0)
+size_in_tiles = Vector2i(2, 4)
+collision_shape = SubResource("RectangleShape2D_vndbe")
+furniture_set = "bedroom"
+max_health = 400.0

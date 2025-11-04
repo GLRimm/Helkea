@@ -3,18 +3,22 @@ class_name RoomData
 
 enum LayoutType {
 	EMPTY,
-	SPARSE,
-	SCATTERED,
-	CORRIDORS,
+	#SPARSE,
+	#SCATTERED,
+	#CORRIDORS,
+	SHOWROOM,
 	ROWS,
 	COLUMNS,
-	CROSSES,
-	QUARTERS,
-	PILLARS,
-	ARENA,
-	GAUNTLET,
-	CHECKERBOARD,
-	CLUSTERED,
+	GRID,
+	PERIMETER,
+	MAZE,
+	#CROSSES,
+	#QUARTERS,
+	#PILLARS,
+	#ARENA,
+	#GAUNTLET,
+	#CHECKERBOARD,
+	#CLUSTERED,
 	CUSTOM
 }
 
@@ -36,13 +40,11 @@ enum LayoutType {
 @export var is_cleared: bool = false
 @export var is_visited: bool = false
 
-@export var layout_type: LayoutType
+@export var layout_type: LayoutType = LayoutType.EMPTY
 @export var floor_type: String
-@export var furniture_set: String
+@export var furniture_set: String = "living_room"
 
-var wall_tiles: Array[Vector2i] = []
-var furniture_zones: Array[Rect2i] = []
-var placed_furniture: Array[Dictionary] = []
+var furniture_placements: Array = []
 
 var layout_seed: int = 0
 

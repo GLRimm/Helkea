@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="FurniturePieceData" load_steps=4 format=3 uid="uid://ctop3h0htyh86"]
+
+[ext_resource type="Script" uid="uid://cw4p05255o8hd" path="res://resources/furniture_piece_data.gd" id="1_oq0bd"]
+[ext_resource type="Texture2D" uid="uid://c3eh1d7odw5it" path="res://assets/room_tilesets/Kitcheen.png" id="2_dagg0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g8ndg"]
+size = Vector2(32, 32)
+
+[resource]
+script = ExtResource("1_oq0bd")
+furniture_name = "Pot Large"
+sprite_texture = ExtResource("2_dagg0")
+atlas_coords = Vector2i(7, 2)
+size_in_tiles = Vector2i(1, 1)
+collision_shape = SubResource("RectangleShape2D_g8ndg")
+furniture_set = "kitchen"
+weight = 4
+max_health = 50.0
