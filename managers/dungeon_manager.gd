@@ -31,7 +31,7 @@ func generate_new_dungeon():
 			current_room_position = pos
 			break
 	
-	current_room = _load_room_at_position(current_room_position)
+	current_room = await _load_room_at_position(current_room_position)
 	_spawn_player()
 
 func _clear_dungeon():
@@ -57,7 +57,7 @@ func _load_room_at_position(grid_pos: Vector2i):
 	var room = default_room_scene.instantiate()
 	room_container.add_child(room)
 	room.position = Vector2.ZERO
-	room.setup(dungeon_rooms[grid_pos])
+	await room.setup(dungeon_rooms[grid_pos])
 	room.door_entered.connect(_on_door_entered)
 	room.room_cleared.connect(_on_room_cleared)
 	
@@ -103,7 +103,7 @@ func _transition_to_room_async(target_pos: Vector2i, from_direction: String):
 	await get_tree().process_frame
 	
 	# Load new room
-	var target_room = _load_room_at_position(target_pos)
+	var target_room = await _load_room_at_position(target_pos)
 	if not target_room:
 		push_error("Failed to load room at %s" % target_pos)
 		return

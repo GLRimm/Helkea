@@ -8,6 +8,8 @@ extends Node2D
 @export var living_room_tileset: TileSet
 @export var bathroom_tileset: TileSet
 
+@onready var wall_tile_map = $TileMapWalls
+
 var room_data: RoomData
 var is_cleared: bool = false
 var is_visited: bool = false
@@ -20,6 +22,14 @@ signal room_cleared
 signal door_entered(direction: String)
 
 const TILE_SIZE = 32
+const OPEN_NORTH_DOOR = preload("res://patterns/open_north_door.tres")
+const CLOSED_NORTH_DOOR = preload("res://patterns/closed_north_door.tres")
+const OPEN_WEST_DOOR = preload("res://patterns/open_west_door.tres")
+const CLOSED_WEST_DOOR = preload("res://patterns/closed_west_door.tres")
+const OPEN_EAST_DOOR = preload("res://patterns/open_east_door.tres")
+const CLOSED_EAST_DOOR = preload("res://patterns/closed_east_door.tres")
+const OPEN_SOUTH_DOOR = preload("res://patterns/open_south_door.tres")
+const CLOSED_SOUTH_DOOR = preload("res://patterns/closed_south_door.tres")
 
 func _init():
 	layout_generator = RoomLayoutGenerator.new()
@@ -39,6 +49,7 @@ func setup(data: RoomData):
 			room_data.room_id,
 			room_data.furniture_zones.size()
 		])
+	await get_tree().process_frame
 		
 	_apply_layout()
 	_setup_doors()
@@ -152,10 +163,9 @@ func _configure_doors():
 	for direction in all_doors.keys():
 		var door = all_doors[direction]
 		var is_connected = room_data.connections.get(direction, false)
-		door.visible = is_connected
 		door.monitoring = is_connected
 		if is_connected and not is_cleared:
-			door.lock(true)
+			_lock_door(door, true)
 
 func _apply_room_tint():
 	match room_data.room_type:
@@ -227,7 +237,37 @@ func _on_room_cleared():
 func _lock_all_doors(should_lock: bool):
 	for door in all_doors.values():
 		if door.visible and room_data.connections.get(door.direction, false):
-			door.lock(should_lock)
+			_lock_door(door, should_lock)
+			
+func _lock_door(door: Door, should_lock: bool):
+	if not has_node("TileMapWalls"):
+		print("WARNING: No TileMapWalls node found!")
+		return
+	
+	var wall_tile_map = $TileMapWalls
+	
+	print("DEBUG: _lock_door called for %s door, should_lock=%s" % [door.direction, should_lock])
+	
+	match door.direction:
+		"north":
+			var pattern = CLOSED_NORTH_DOOR if should_lock else OPEN_NORTH_DOOR
+			print("DEBUG: Setting north door pattern at (8, -3)")
+			wall_tile_map.set_pattern(Vector2i(8, -3), pattern)
+		"west":
+			var pattern = CLOSED_WEST_DOOR if should_lock else OPEN_WEST_DOOR
+			print("DEBUG: Setting west door pattern at (-1, 6)")
+			wall_tile_map.set_pattern(Vector2i(-1, 6), pattern)
+		"east":
+			var pattern = CLOSED_EAST_DOOR if should_lock else OPEN_EAST_DOOR
+			print("DEBUG: Setting east door pattern at (20, 6)")
+			wall_tile_map.set_pattern(Vector2i(20, 6), pattern)
+		"south":
+			var pattern = CLOSED_SOUTH_DOOR if should_lock else OPEN_SOUTH_DOOR
+			print("DEBUG: Setting south door pattern at (8, 19)")
+			wall_tile_map.set_pattern(Vector2i(8, 19), pattern)
+	
+	print("DEBUG: Pattern applied, calling door.lock(%s)" % should_lock)
+	door.lock(should_lock)
 
 func _spawn_treasure():
 	if health_pack_scene:
