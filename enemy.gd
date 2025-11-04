@@ -33,6 +33,15 @@ func _physics_process(delta):
 	# Set velocity and move
 	velocity = direction * speed
 	move_and_slide()
+	
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		
+		if collider is RigidBody2D:
+			var push_force = 200.0  # Enemies push less forcefully than player
+			var push_direction = collision.get_normal() * -1
+			collider.apply_central_impulse(push_direction * push_force * delta)
 
 func take_damage(amount: float, attacker_position: Vector2):
 	$HealthComponent.take_damage(amount, global_position)

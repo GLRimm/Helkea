@@ -86,6 +86,16 @@ func _physics_process(delta: float) -> void:
 			$AnimationPlayer.play("run_" + direction)
 		
 	move_and_slide()
+	
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		
+		# If we hit furniture, push it
+		if collider is RigidBody2D:
+			var push_force = 300.0  # Adjust this value for push strength
+			var push_direction = collision.get_normal() * -1  # Opposite of collision normal
+			collider.apply_central_impulse(push_direction * push_force * delta)
 	# position = position.clamp(Vector2.ZERO, screen_size)
 
 		
